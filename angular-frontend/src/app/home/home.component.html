@@ -1,0 +1,8 @@
+
+<li *ngIf="sessionInfo?.session.isValid; else needLogin">
+    {{sessionInfo.session.id}}
+</li>
+
+<ng-template #neddLogin>
+    <p>please Login</p>
+</ng-template>

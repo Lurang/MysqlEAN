@@ -1,0 +1,50 @@
+<mat-drawer-container class="mat-container" hasBackdrop="true" autosize>    
+  <mat-drawer #drawer mode="over">
+  
+  <mat-vertical-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Fill out your id</ng-template>
+        <mat-form-field>
+          <input matInput placeholder="id" formControlName="firstCtrl" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Fill out your password</ng-template>
+        <mat-form-field>
+          <input matInput placeholder="password" type="password" formControlName="secondCtrl" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      You are now done.
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button>Signup</button>
+      </div>
+    </mat-step>
+  </mat-vertical-stepper>
+</mat-drawer>
+  <form [formGroup]="loginForm" class="login-form">
+    <mat-form-field class="login-full-width">
+      <input name="id" formControlName="id" matInput placeholder="id">
+    </mat-form-field>
+    <mat-form-field class="login-full-width">
+      <input name="password" formControlName="password" type="password" matInput placeholder="password">
+    </mat-form-field>
+  </form>
+    <button mat-raised-button class="loginButton" (click)="onLoginSubmit(loginForm)">Login</button>
+    <button mat-raised-button class="loginButton" (click)="drawer.toggle()">Sign Up</button>
+ </mat-drawer-container>
+
+
