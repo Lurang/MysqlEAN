@@ -8,12 +8,12 @@
   <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container matColumnDef="index">
       <mat-header-cell *matHeaderCellDef> NO </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.post_id}} </mat-cell>
+      <mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </mat-cell>
     </ng-container>
   
     <ng-container matColumnDef="title">
       <mat-header-cell *matHeaderCellDef> title </mat-header-cell>
-      <mat-cell *matCellDef="let element"><a routerLink="#">{{element.post_title}}</a></mat-cell>
+      <mat-cell *matCellDef="let element"><a routerLink="/board/{{element.board_id}}/{{element.post_id}}">{{element.post_title}}</a></mat-cell>
     </ng-container>
   
     <ng-container matColumnDef="date">

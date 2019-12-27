@@ -1,5 +1,4 @@
-import { Component, OnInit, Directive, Input, Output } from '@angular/core';
-import { Session } from './home';
+import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../login.service';
 
 @Component({
@@ -9,7 +8,7 @@ import { LoginService } from '../login.service';
 })
 export class HomeComponent implements OnInit {
   constructor(
-    private loginService: LoginService,
+    public loginService: LoginService,
   ) { };
 
   ngOnInit() {

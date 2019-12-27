@@ -11,7 +11,6 @@ import { LoginService } from '../login.service';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
-  boardList: BoardList[];
 
   constructor(
     private boardService: BoardService,
@@ -19,15 +18,7 @@ export class MenuComponent implements OnInit {
   ) { };
 
   ngOnInit() {
-    this.getBoardList();
-  };
-
-  getBoardList(): void {
-    this.boardService.reqBoardList()
-      .subscribe((board) => {
-        this.boardList = board.board;
-        this.loginService.session = board.session;
-      });
+    this.boardService.reqBoardList();
   };
 
   logout(): void {

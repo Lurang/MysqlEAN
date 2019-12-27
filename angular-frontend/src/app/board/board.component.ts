@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
 import { BoardService } from './board.service';
-import { PostList, PostDetail } from './board';
+import { PostList, PostInfo } from './board';
 
 @Component({
   selector: 'app-board',
@@ -17,7 +17,8 @@ export class BoardComponent implements OnInit {
   pageSizeOptions;
   postList: PostList;
   displayedColumns: string[] = ['index', 'title', 'date', 'author', 'count'];
-  dataSource ;
+  dataSource;
+  
   constructor(
       private route: ActivatedRoute,
       private boardService: BoardService,
@@ -31,12 +32,12 @@ export class BoardComponent implements OnInit {
       this.getPostList();
     });
   };
-
+  
   getPostList(): void {
     this.boardService.reqPostList(this.boardId)
       .subscribe(data => {
         this.postList = data;
-        this.dataSource = new MatTableDataSource<PostDetail>(this.postList.posts);
+        this.dataSource = new MatTableDataSource<PostInfo>(this.postList.posts);
         this.dataSource.paginator = this.paginator;
       });
   };

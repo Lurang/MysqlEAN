@@ -88,3 +88,19 @@ exports.logout = (req, res) => {
         })
     });
 };
+exports.getPost = async (req, res) => {
+    const {boardId, postId} = req.params;
+    const [[boardInfo], [postInfo], [comment]] = await Promise.all([
+        board.searchBoard(boardId),
+        board.searchPost(postId),
+        board.getComment(postId),
+    ]);
+    if (boardInfo[0] == null) {
+        return res.redirect('/');
+    };
+    res.json({
+        boardInfo: boardInfo[0],
+        postInfo: postInfo[0],   
+        comment: comment,
+    });
+}

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../environments/environment';
-import { PostList, Index } from './board';
+import { PostList, Index, PostDetail, BoardList } from './board';
 
 const header = {
   headers: {
@@ -17,15 +17,21 @@ const header = {
   providedIn: 'root'
 })
 export class BoardService {
-  //board: BoardList;
   private apiBaseUrl = environment.apiBaseUrl;
+  boardList: BoardList[];
 
   constructor(private http: HttpClient) { }
 
   reqBoardList() {
-    return this.http.get<Index>(`${this.apiBaseUrl}`, header);
-  }
+    this.http.get<Index>(`${this.apiBaseUrl}`, header)
+      .subscribe((board) => {
+        this.boardList = board.board;
+      });
+  };
   reqPostList(id) {
     return this.http.get<PostList>(`${this.apiBaseUrl}/board/${id}`, header);
-  }
+  };
+  reqPostDetail(boardId, postId) {
+    return this.http.get<PostDetail>(`${this.apiBaseUrl}/board/${boardId}/${postId}`, header);
+  };
 }

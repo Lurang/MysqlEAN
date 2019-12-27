@@ -48,6 +48,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import { HomeComponent } from './home/home.component';
+import { BoardDetailComponent } from './board-detail/board-detail.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { HomeComponent } from './home/home.component';
     MenuComponent,
     BoardComponent,
     HomeComponent,
+    BoardDetailComponent,
   ],
   imports: [    
     BrowserModule,

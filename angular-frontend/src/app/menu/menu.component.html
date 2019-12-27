@@ -2,8 +2,8 @@
   <div id="cssmenu">
     <ul>
       <li><a routerLink="/">Home</a></li>
-      <li *ngFor="let board of boardList">
-          <a routerLink="board/{{board.board_id}}">{{board.board_name}}</a>
+      <li *ngFor="let board of boardService.boardList">
+        <a routerLink="board/{{board.board_id}}">{{board.board_name}}</a>
       </li>
         <li *ngIf="loginService.session?.isValid">
           <a routerLink="/" (click)="logout()">Logout</a>

@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../environments/environment';
-import { Session, SessionInfo } from './home/home';
-import { User, Login } from './user/user';
+import { User, Login, Session, SessionInfo } from './user/user';
 
 const header = {
   headers: {

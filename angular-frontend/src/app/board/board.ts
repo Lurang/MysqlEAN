@@ -1,9 +1,10 @@
 export interface Board {
   board_id: number,
+  admin: number,
   board_name: string,
-}
+};
 
-export interface PostDetail {
+export interface PostInfo {
   post_id: number,
   author: string,
   post_title: string,
@@ -12,33 +13,50 @@ export interface PostDetail {
   date: Date,
   countn: number,
   count: number,
-}
+};
 
 export interface BoardName {
   board_id: number,
   admin: string,
   board_name: string,
-}
+};
 
 export interface PostList {
-  posts: PostDetail[],
+  posts: PostInfo[],
   boardName: BoardName,
-}
+};
 
 export interface BoardList {
   board_id: number,
   board_name: string,
-}
+};
+
 export interface Session {
   id: string,
   isValid: boolean,
   admin: boolean,
-}
+};
 
-export interface Index{
+export interface Index {
   board: BoardList[],
   session: Session,
-}
+};
+
+export interface PostDetail {
+  boardInfo: Board,
+  postInfo: JSON,
+  comment: Comment[],
+};
+export interface Comment {
+  comment_id: number,
+  post_id: number,
+  comment_author: string,
+  comment_body: string,
+  date: Date,
+  group_id: number,
+  pid: number,
+  author: string,
+};
 /*
 {
   "board":[
