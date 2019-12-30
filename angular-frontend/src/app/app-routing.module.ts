@@ -8,16 +8,18 @@ import { AdminComponent } from './admin/admin.component';
 import { BoardPostFormComponent } from './board-post-form/board-post-form.component';
 
 import { BoardDetailComponent } from './board-detail/board-detail.component';
+import { LoginGuard } from './login.guard';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'user', component: UserComponent },
     { path: 'board/:boardId', component: BoardComponent },
-    { path: 'board/:boardId/newPost', component:BoardPostFormComponent },
+    { path: 'board/:boardId/newPost', component:BoardPostFormComponent, canActivate: [LoginGuard] },
     { path: 'board/:boardId/:postId', component: BoardDetailComponent },
-    { path: 'board/:boardId/:postId/modify', component: BoardPostFormComponent },
+    { path: 'board/:boardId/:postId/modify', component: BoardPostFormComponent, canActivate: [LoginGuard] },
     { path: 'home', component: HomeComponent },
-    { path: 'admin', component: AdminComponent },
+    { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
