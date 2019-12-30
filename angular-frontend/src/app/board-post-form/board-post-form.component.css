@@ -1,0 +1,14 @@
+.mainContainer {
+	display: flex;
+	flex-direction: column;
+}
+form {
+	margin : 1rem;
+	display: flex;
+	flex-direction: column;
+}
+button {
+	width: 100px;
+	align-self: flex-end;
+	float: right;
+}

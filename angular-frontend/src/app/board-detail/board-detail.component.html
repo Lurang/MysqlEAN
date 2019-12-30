@@ -1,20 +1,25 @@
-<mat-list>
-    <mat-list-item>{{ postDetail?.postInfo?.post_title }}</mat-list-item>
-    <mat-divider></mat-divider>
-    <mat-list-item>{{ postDetail?.postInfo?.author }}</mat-list-item>
-    <mat-divider></mat-divider>
-    <mat-list-item>{{ postDetail?.postInfo?.post_body }}</mat-list-item>
-    <mat-divider></mat-divider>
-</mat-list>
+<div class="bdContainer">
+  <div class="post">
+    <mat-list>
+        <mat-list-item>제목 : {{ postDetail?.postInfo?.post_title }}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>작성자 : {{ postDetail?.postInfo?.author }}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>내용 : {{ postDetail?.postInfo?.post_body }}</mat-list-item>
+        <mat-divider></mat-divider>
+    </mat-list>
+    <div *ngIf="(postDetail?.postInfo.author === loginService?.session.id) || loginService?.session.admin">
+      <button mat-raised-button (click)="modifyPost()">수정</button>
+      <button mat-raised-button (click)="deletePost()">삭제</button>
+    </div>
+    <div>
+      <button mat-raised-button (click)="backToList()">목록으로</button>
+    </div>
+  </div>
 
 
-<div class="example-container mat-elevation-z8">
+  <div class="example-container mat-elevation-z8 comment">
     <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-      <ng-container matColumnDef="index">
-        <mat-header-cell *matHeaderCellDef> NO </mat-header-cell>
-        <mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </mat-cell>
-      </ng-container>
-    
       <ng-container matColumnDef="body">
         <mat-header-cell *matHeaderCellDef> 내용 </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.comment_body}} </mat-cell>
@@ -37,7 +42,7 @@
     
       <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-  
     </mat-table>
-  <mat-paginator [pageSizeOptions]="[5, 10]" showFirstLastButtons></mat-paginator>
-</div>
+    <mat-paginator [pageSizeOptions]="[5, 10]" showFirstLastButtons></mat-paginator>
+  </div>
+  </div>

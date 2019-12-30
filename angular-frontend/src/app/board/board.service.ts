@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { environment } from '../../environments/environment';
 import { PostList, Index, PostDetail, BoardList } from './board';
+import { LoginService } from '../login.service';
 
 const header = {
   headers: {
@@ -20,7 +21,10 @@ export class BoardService {
   private apiBaseUrl = environment.apiBaseUrl;
   boardList: BoardList[];
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private loginService: LoginService,
+  ) { }
 
   reqBoardList() {
     this.http.get<Index>(`${this.apiBaseUrl}`, header)
@@ -34,4 +38,24 @@ export class BoardService {
   reqPostDetail(boardId, postId) {
     return this.http.get<PostDetail>(`${this.apiBaseUrl}/board/${boardId}/${postId}`, header);
   };
-}
+  deletePost(postId) {
+    return this.http.post<JSON>(`${this.apiBaseUrl}/board/deletePost?postId=${postId}`, header);
+  };
+  addPost(boardId, title, body) {
+    let data = {
+      boardId: boardId,
+      title: title,
+      body: body,
+      author: this.loginService.session.id,
+    };
+    return this.http.post<JSON>(`${this.apiBaseUrl}/board/addPost`, data);
+  };
+  updatePost(postId, title, body) {
+    let data = {
+      postId: postId,
+      title: title,
+      body: body,
+    };
+    return this.http.post<JSON>(`${this.apiBaseUrl}/board/update`, data);
+  };
+};

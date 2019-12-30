@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Session, BoardList } from '../board/board';
-
 import { BoardService} from '../board/board.service';
 import { LoginService } from '../login.service';
 
@@ -19,12 +17,13 @@ export class MenuComponent implements OnInit {
 
   ngOnInit() {
     this.boardService.reqBoardList();
+    this.loginService.reqSessionInfo();
   };
 
   logout(): void {
     this.loginService.reqLogout()
     .subscribe((data) => {
-      if (data.message === 1) {
+      if (data.code === 1) {
         window.location.reload();
       };
     });

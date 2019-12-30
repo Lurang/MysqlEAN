@@ -4,7 +4,7 @@
     </ul>
 </div>
 
-<div class="example-container mat-elevation-z8">
+<div class="container-mat">
   <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container matColumnDef="index">
       <mat-header-cell *matHeaderCellDef> NO </mat-header-cell>
@@ -35,5 +35,11 @@
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 
   </mat-table>
-<mat-paginator [pageSizeOptions]="[10, 5]" showFirstLastButtons></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[10, 5]" showFirstLastButtons></mat-paginator>
+
+  <button mat-raised-button
+    *ngIf="loginService?.session?.admin || 
+    (loginService?.session?.isValid && postList?.boardName?.admin != 1)" type="button" (click)="moveToForm()">
+      New Post
+  </button>
 </div>

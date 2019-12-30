@@ -84,8 +84,9 @@ exports.getSession = (req, res) => {
 exports.logout = (req, res) => {
     req.session.destroy(() => {
         res.json({
-            message: 1,
-        })
+            message: "success",
+            code: 1,
+        });
     });
 };
 exports.getPost = async (req, res) => {
@@ -103,4 +104,61 @@ exports.getPost = async (req, res) => {
         postInfo: postInfo[0],   
         comment: comment,
     });
+};
+
+exports.deletePost = async (req, res) => {
+    const {postId} = req.query;
+    await board.deletePost(postId);
+    res.json({
+        message: "success",
+        code: 1,
+    });
+};
+
+exports.addPost = async (req, res) => {
+    const {boardId, title, body, author} = req.body;
+    await board.addPost(author, title, body, boardId);
+    res.json({
+        message: "success",
+        code: 1,
+    });    
+};
+
+exports.updatePost = async (req, res) => {
+    const {postId, title, body} = req.body;
+    await board.updatePost(title, body, postId);
+    res.json({
+        message: "success",
+        code: 1,
+    });
+};
+exports.signUp = async (req, res) => {
+    const {id, name, password} = req.body;
+    const [row] = await user.checkId(id);
+    if (row[0].count === 0) {
+        const newUser = new user(id, name, password);
+        await newUser.save();
+        res.json({
+            message: "success",
+            code: 1,
+        });
+    } else {
+        res.json({
+            message: "fail",
+            code: 0, //id already exist
+        });
+    };
+};
+exports.sighUpCheck = async (req, res) => {
+    const {id} = req.body;
+    const [row] = await user.checkId(id);
+    if (row[0].count === 0) {
+        res.json({
+            id: 1, //can use id
+        });
+    } else {
+        res.json({
+            id: 0, //id already exist
+        });
+    };
 }

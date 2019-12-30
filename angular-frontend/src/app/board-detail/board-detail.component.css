@@ -1,0 +1,16 @@
+.bdContainer {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    height: 100%;
+}
+.post {
+    flex: 1;
+}
+.comment {
+    flex: 1;
+}
+.post > div {
+    margin-top: 1rem;
+    float: right;
+}

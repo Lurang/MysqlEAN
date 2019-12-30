@@ -49,6 +49,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import { HomeComponent } from './home/home.component';
 import { BoardDetailComponent } from './board-detail/board-detail.component';
+import { AdminComponent } from './admin/admin.component';
+import { BoardPostFormComponent } from './board-post-form/board-post-form.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +60,8 @@ import { BoardDetailComponent } from './board-detail/board-detail.component';
     BoardComponent,
     HomeComponent,
     BoardDetailComponent,
+    AdminComponent,
+    BoardPostFormComponent,
   ],
   imports: [    
     BrowserModule,

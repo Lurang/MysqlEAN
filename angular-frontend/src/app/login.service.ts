@@ -14,7 +14,8 @@ const header = {
 };
 
 interface Message {
-    message: number,
+    message: string,
+    code: number,
 }
 
 @Injectable({
@@ -22,7 +23,6 @@ interface Message {
 })
 export class LoginService {
   session: Session;
-  isLoggedIn = false;
 
   private apiBaseUrl = environment.apiBaseUrl;
 
@@ -42,7 +42,12 @@ export class LoginService {
   login(user: User) {
     return this.http.post<Login>(`${this.apiBaseUrl}/user/login`, user, header);
   };
-  isLogin() {
-    return this.isLoggedIn;
+  signup(id, name, password) {
+    let body = {
+      id: id,
+      name: name,
+      password: password,
+    };
+    return this.http.post<Message>(`${this.apiBaseUrl}/user/signUp`, body);
   };
 };

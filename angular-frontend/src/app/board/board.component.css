@@ -7,20 +7,10 @@ ul, li{
     display: flex;
     flex-direction: column;
 }
-#mainWrapper > ul {
-    display: flex;
-    flex-direction: column;
-}
 #mainWrapper > ul > li:first-child {
   text-align: center;
   font-size:14pt;
   height:40px;
   vertical-align:middle;
-  line-height:30px;
-}
-
-table {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+  margin-top: 10px;
 }

@@ -44,7 +44,7 @@ export interface Index {
 
 export interface PostDetail {
   boardInfo: Board,
-  postInfo: JSON,
+  postInfo: PostInfo,
   comment: Comment[],
 };
 export interface Comment {
