@@ -29,6 +29,7 @@ export interface PostList {
 export interface BoardList {
   board_id: number,
   board_name: string,
+  admin: number,
 };
 
 export interface Session {

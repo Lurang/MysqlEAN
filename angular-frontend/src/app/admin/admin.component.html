@@ -1,1 +1,43 @@
-<p>admin works!</p>
+<mat-accordion>
+    <mat-expansion-panel *ngFor="let board of boardService?.boardList; let i = index">
+      
+        <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{boardService.boardList[i].board_name}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+    
+        <mat-form-field>
+          <input #nameInput matInput placeholder="이름" [(value)]="boardService.boardList[i].board_name" required>
+        </mat-form-field>
+        <mat-action-row>
+          <button mat-button (click)="deleteBoard(i)">삭제</button>
+          <button mat-button (click)="updateBoard(nameInput.value, i)">저장</button>
+        </mat-action-row>
+      
+      <mat-panel-description>
+        <mat-checkbox color="primary" [(ngModel)]="boardService.boardList[i].admin">관리자 전용</mat-checkbox>
+      </mat-panel-description>
+
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+          New Board
+      </mat-expansion-panel-header>
+      <mat-form-field>
+        <input #newNameInput matInput placeholder="이름" required>
+      </mat-form-field>
+      <mat-panel-description>
+        <mat-checkbox color="primary" [(ngModel)]="checkState">관리자 전용</mat-checkbox>
+      </mat-panel-description>
+
+      <mat-action-row>
+        <button mat-button (click)="newBoard(newNameInput.value)">추가</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+
+  </mat-accordion>
+  <!--
+      <input type="text" formControlName="name" [(value)]="board.board_name" required>
+-->

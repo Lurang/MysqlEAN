@@ -61,7 +61,7 @@ module.exports = class Board {
 
     /* about board */
     static boardList() {
-       return db.execute(`select board_id, board_name from board_information`);
+       return db.execute(`select board_id, board_name, admin from board_information`);
     }
     static searchBoard(id) {
         return db.execute(`select * from board_information where board_id = ?`, [id]);

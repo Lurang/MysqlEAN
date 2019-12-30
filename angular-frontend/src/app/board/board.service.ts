@@ -58,4 +58,33 @@ export class BoardService {
     };
     return this.http.post<JSON>(`${this.apiBaseUrl}/board/update`, data);
   };
+
+  updateBoard(boardId, boardName, admin) {
+    if (admin === true) {
+      admin = 1;
+    } else if (admin === false) {
+      admin = 0;
+    };
+    let body = {
+      boardId: boardId,
+      boardName: boardName,
+      admin: admin,
+    };
+    return this.http.post(`${this.apiBaseUrl}/admin/updateBoard`, body);
+  };
+  newBoard(boardName, admin) {
+    if (admin === true) {
+      admin = 1;
+    } else if (admin === false) {
+      admin = 0;
+    };
+    let body = {
+      boardName: boardName,
+      admin: admin,
+    };
+    return this.http.post(`${this.apiBaseUrl}/admin/newBoard`, body);
+  };
+  deleteBoard(boardId) {
+    return this.http.post(`${this.apiBaseUrl}/admin/deleteBoard`, {boardId: boardId});
+  };
 };

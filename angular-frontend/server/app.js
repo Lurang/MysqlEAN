@@ -10,10 +10,6 @@ const WebSocket = require('ws');
 const amqp = require('amqp');
 const cors = require('cors');
 
-const indexRouter = require('./router/index');
-const adminRouter = require('./router/admin');
-const userRouter = require('./router/user');
-const boardRouter = require('./router/board');
 const apiRouter = require('./router/api')
 const chatDb = require('./model/chat');
 
@@ -81,10 +77,6 @@ app.use('*', (req, res) => {
     const indexFile = path.resolve(__dirname, '../dist/index.html');
     res.sendFile(indexFile);
 })
-app.use(indexRouter.routes);
-app.use('/user', userRouter.routes);
-app.use('/admin', auth, adminRouter.routes);
-app.use('/board', boardRouter.routes);
 
 //webSocket setting
 const server = http.createServer(app);
