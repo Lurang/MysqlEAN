@@ -48,6 +48,7 @@ export interface PostDetail {
   postInfo: PostInfo,
   comment: Comment[],
 };
+
 export interface Comment {
   comment_id: number,
   post_id: number,
@@ -58,6 +59,7 @@ export interface Comment {
   pid: number,
   author: string,
 };
+
 /*
 {
   "board":[

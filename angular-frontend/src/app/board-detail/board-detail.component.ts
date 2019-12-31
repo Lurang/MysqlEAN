@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
+
+import { LoginService } from '../login.service';
 import { BoardService } from '../board/board.service';
 import { PostDetail, Comment } from '../board/board';
-import { MatTableDataSource, MatPaginator } from '@angular/material';
 
 @Component({
   selector: 'app-board-detail',
@@ -21,6 +23,7 @@ export class BoardDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private boardService: BoardService,
+    private loginService: LoginService,
   ) { };
   
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -36,6 +39,7 @@ export class BoardDetailComponent implements OnInit {
           this.dataSource.paginator = this.paginator;
         });
     });
+    this.loginService.reqSessionInfo();
   };
   modifyPost() {
     this.router.navigate([`/board/${this.boardId}/${this.postId}/modify`]);

@@ -16,7 +16,7 @@ exports.getIndex = async (req, res) => {
    res.json({
        board: rows,
        session: req.session.user,
-       //chats: crows,
+       chats: crows,
    });
 };
 

@@ -1,0 +1,51 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:700);
+
+
+#chatLogs {
+    flex: 1;
+    margin-top: auto;
+    overflow: auto;
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+}
+#chatLogs > ul > li {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+
+ul, li{ 
+    list-style:none;
+    padding:0;
+    margin:0;
+}
+
+mat-card {
+    width: calc(100% - 150px);
+    height: calc(100% - 70px);
+    word-break: break-all;
+    overflow: auto;
+}
+
+.right { 
+    float: right;
+    text-align: left;
+}
+.mainContainer {
+    display: flex;
+    height: 90%;
+}
+.home {
+    flex: 7;
+}
+.footer{
+    display: flex;
+    flex-direction: column;
+    flex: 3;
+    text-align: center;
+    height: 95%;
+    width: 100%;
+    margin-top: auto;
+}

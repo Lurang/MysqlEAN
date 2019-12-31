@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../environments/environment';
-import { User, Login, Session, SessionInfo } from './user/user';
+import { Session, SessionInfo, Info, Chat } from './user/user';
 
 const header = {
   headers: {
@@ -16,13 +16,14 @@ const header = {
 interface Message {
     message: string,
     code: number,
-}
+};
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
   session: Session;
+  chat: Chat[];
 
   private apiBaseUrl = environment.apiBaseUrl;
 
@@ -31,16 +32,17 @@ export class LoginService {
   ) { };
 
   reqSessionInfo() {
-    this.http.get<SessionInfo>(`${this.apiBaseUrl}/home`, header)
+    this.http.get<Info>(`${this.apiBaseUrl}`, header)
       .subscribe((data) => {
         this.session = data.session;
+        this.chat = data.chats;
       });
   };
   reqLogout() {
     return this.http.get<Message>(`${this.apiBaseUrl}/user/logout`);
   };
-  login(user: User) {
-    return this.http.post<Login>(`${this.apiBaseUrl}/user/login`, user, header);
+  login(user) {
+    return this.http.post<SessionInfo>(`${this.apiBaseUrl}/user/login`, user, header);
   };
   signup(id, name, password) {
     let body = {
