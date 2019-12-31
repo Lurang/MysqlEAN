@@ -10,7 +10,10 @@ const WebSocket = require('ws');
 const amqp = require('amqp');
 const cors = require('cors');
 
-const apiRouter = require('./router/api')
+const apiRouter = require('./router/api');
+const boardRouter = require('./router/boardApi');
+const userRouter = require('./router/userApi');
+const adminRouter = require('./router/adminApi');
 const chatDb = require('./model/chat');
 
 //express
@@ -63,15 +66,10 @@ app.use((req, res, next) => {
     next();
 });
 
-//checkAdminPermission
-const auth = (req, res, next) => {
-    if (req.session.user && req.session.user.admin) {
-        return next();
-    }
-    res.redirect('/');
-};
-
 //routes
+app.use('/api/board', boardRouter.routes);
+app.use('/api/user', userRouter.routes);
+app.use('/api/admin', adminRouter.routes);
 app.use('/api', apiRouter.routes);
 app.use('*', (req, res) => {
     const indexFile = path.resolve(__dirname, '../dist/index.html');
