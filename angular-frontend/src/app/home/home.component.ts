@@ -16,7 +16,7 @@ interface LastChat {
 export class HomeComponent implements OnInit {
   lastChat: LastChat;
   beforeChat: Chat;
-  
+
   constructor(
     public loginService: LoginService,
   ) { };
@@ -37,9 +37,19 @@ export class HomeComponent implements OnInit {
   };
 
   connect() {
+    /*
+      if (!(this.loginService.session && (this.loginService.session.id === '0'))) {
+        return;
+      };
+    */
     const ws = new WebSocket('ws://localhost:3000');
     
     const sendMessage = () => {
+      if (this.loginService.session) {
+        if (this.loginService.session.id === '0') {
+          return;
+        };
+      };
       let msgForm =  (<HTMLInputElement>document.getElementById('msgForm'));
       if (msgForm.value === '') {
         return;
@@ -64,6 +74,7 @@ export class HomeComponent implements OnInit {
     };
     
     ws.onclose = () => {
+      console.log('socket disconnected');
       this.ngOnInit();
     };
     
