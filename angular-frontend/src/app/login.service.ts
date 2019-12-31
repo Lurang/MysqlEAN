@@ -37,7 +37,7 @@ export class LoginService {
       });
   };
   reqLogout() {
-    return this.http.get<Message>(`${this.apiBaseUrl}/logout`);
+    return this.http.get<Message>(`${this.apiBaseUrl}/user/logout`);
   };
   login(user: User) {
     return this.http.post<Login>(`${this.apiBaseUrl}/user/login`, user, header);

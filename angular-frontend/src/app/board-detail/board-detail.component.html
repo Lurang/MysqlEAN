@@ -8,7 +8,7 @@
         <mat-list-item>내용 : {{ postDetail?.postInfo?.post_body }}</mat-list-item>
         <mat-divider></mat-divider>
     </mat-list>
-    <div *ngIf="(postDetail?.postInfo.author === loginService?.session.id) || loginService?.session.admin">
+    <div *ngIf="(loginService?.session && (postDetail?.postInfo.author === loginService?.session.id)) || (loginService?.session && loginService?.session.admin)">
       <button mat-raised-button (click)="modifyPost()">수정</button>
       <button mat-raised-button (click)="deletePost()">삭제</button>
     </div>

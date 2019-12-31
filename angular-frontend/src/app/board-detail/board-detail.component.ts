@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BoardService } from '../board/board.service';
 import { PostDetail, Comment } from '../board/board';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
-import { LoginService } from '../login.service';
 
 @Component({
   selector: 'app-board-detail',
@@ -22,7 +21,6 @@ export class BoardDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private boardService: BoardService,
-    private loginService: LoginService,
   ) { };
   
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;

@@ -23,7 +23,7 @@ router.route('/user/login')
     .post(apiController.postLogin)
 router.route('/user/signUp')
     .post(apiController.signUp)
-router.route('/logout')
+router.route('/user/logout')
     .get(apiController.logout)
     
 router.route('/home')

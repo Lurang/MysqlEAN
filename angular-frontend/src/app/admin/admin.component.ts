@@ -20,18 +20,18 @@ export class AdminComponent implements OnInit {
 
   updateBoard(data, index) {
     this.boardService.updateBoard(this.boardService.boardList[index].board_id, data, this.boardService.boardList[index].admin)
-      .subscribe((data) => {
+      .subscribe(() => {
         window.location.reload();
       });
   };
   newBoard(data) {
     if (!data) {
-
+      return;
     } else {
       this.boardService.newBoard(data, this.checkState)
         .subscribe(() => {
           window.location.reload();
-        })
+        });
     };
   };
   deleteBoard(index) {

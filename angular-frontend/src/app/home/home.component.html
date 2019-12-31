@@ -1,4 +1,3 @@
-
 <div class="home">
     <div *ngIf="loginService.session?.isValid">
         <mat-list>
@@ -11,4 +10,29 @@
             <mat-list-item>Please Login</mat-list-item>
         </mat-list>
     </div>
+</div>
+
+<div class="footer">    
+    <div id="chatLogs" class="chat_logs">
+        <ng-template *ngFor="">
+            <li *ngIf="" style="text-align: right; color: red;">
+
+            </li>
+            <li *ngIf="" style="text-align: left;">
+                
+            </li>
+        </ng-template>
+    </div>
+    <div *ngIf="loginService?.session && loginService.session.isValid; else needLogin">
+        <form action="#">
+            <div>
+                <label>Message: </label>
+                <input type="text" class="form-control" id="msgForm">
+            </div>
+            <input type='button' id='sendMessage' value='send'/>
+        </form>
+    </div>
+    <ng-template #needLogin>
+        <p>로그인이 필요한 서비스입니다.</p>
+    </ng-template>
 </div>
