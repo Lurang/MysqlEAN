@@ -76,40 +76,6 @@ export class SocketService {
       let chatLogs = document.getElementById('chatLogs');
       switch (data.event) {
         case 'login':
-          /*
-          if (data.chat) {
-            data.chat.forEach((data) => {
-              if (this.loginService.session && (data.author === this.loginService.session.id)) {
-                chatLogs.innerHTML += `
-                <ul style="padding: 0; margin: 0;">
-                  <div>
-                    <li style="list-style:none; text-align: right; color: red;">
-                      ${data.author}
-                    </li>
-                    <mat-card class="mat-card" style="float: right; text-align: left; width: calc(100% - 150px); height: calc(100% - 70px); word-break: break-all; overflow: auto;">
-                      ${data.body}
-                    </mat-card>
-                  </div>
-                </ul>`
-                chatLogs.scrollTop = chatLogs.scrollHeight;
-              } else {
-                chatLogs.innerHTML += `
-                <ul style="padding: 0; margin: 0;">
-                  <div>
-                    <li style="list-style:none; text-align: left; padding:0; margin:0;">
-                      ${data.author}
-                    </li>
-                    <mat-card class="mat-card" style="width: calc(100% - 150px); height: calc(100% - 70px); word-break: break-all; overflow: auto;">
-                      ${data.body}
-                    </mat-card>
-                  </div>
-                </ul>`;
-                this.lastChat.author = data.author;
-                this.lastChat.body = data.body;
-              };
-            });
-          };
-          */
           if (this.loginService.session && this.loginService.session.isValid) {
             chatLogs.innerHTML += `<li style='text-align: center; margin-top: 2px; margin-bottom: 2px;
               list-style:none; color: blue;'>${data.id}님이 입장하셨습니다.</li>`;
