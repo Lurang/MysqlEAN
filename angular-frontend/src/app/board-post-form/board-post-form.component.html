@@ -1,10 +1,10 @@
 <div class="mainContainer">
     <form [formGroup]="postForm" (ngSubmit)="onSubmit(postForm.value)">
         <mat-form-field>
-            <input matInput type="text" formControlName="title" placeholder="제목" value="{{postForm.title}}" required>
+            <input matInput type="text" formControlName="title" placeholder="제목" required>
         </mat-form-field>
         <mat-form-field>
-            <textarea matInput rows="15" formControlName="body" placeholder="내용" value="{{postForm.body}}" required></textarea>
+            <textarea matInput rows="15" formControlName="body" placeholder="내용" required></textarea>
         </mat-form-field>
         <div class="buttons">
             <button mat-raised-button type="submit">저장</button>
