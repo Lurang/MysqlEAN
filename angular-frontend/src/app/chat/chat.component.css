@@ -14,7 +14,7 @@
     margin-bottom: 2px;
 }
 
-ul, li{ 
+ul, li { 
     list-style:none;
     padding:0;
     margin:0;
@@ -31,7 +31,7 @@ mat-card {
     float: right;
     text-align: left;
 }
-.footer{
+.chatter {
     flex: 1;
     display: flex;
     flex-direction: column;

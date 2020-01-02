@@ -25,7 +25,8 @@ export class BoardPostFormComponent implements OnInit {
   ) {
     this.route.paramMap.subscribe(params => {
       this.boardId = params.get('boardId');  
-      this.postId = params.get('postId');    
+      this.postId = params.get('postId');  
+      console.log(this.postId)  
     });
   };
 

@@ -16,8 +16,8 @@ const routes: Routes = [
     { path: 'home', component: HomeComponent },
     { path: 'user', component: UserComponent },
     { path: 'board/:boardId', component: BoardComponent },
-    { path: 'board/:boardId/:postId', component: BoardDetailComponent },
     { path: 'board/:boardId/newPost', component:BoardPostFormComponent, canActivate: [LoginGuard] },
+    { path: 'board/:boardId/:postId', component: BoardDetailComponent },
     { path: 'board/:boardId/:postId/modify', component: BoardPostFormComponent, canActivate: [LoginGuard] },
     { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
 ];
