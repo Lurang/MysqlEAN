@@ -51,6 +51,8 @@ import { HomeComponent } from './home/home.component';
 import { BoardDetailComponent } from './board-detail/board-detail.component';
 import { AdminComponent } from './admin/admin.component';
 import { BoardPostFormComponent } from './board-post-form/board-post-form.component';
+import { ChatComponent } from './chat/chat.component';
+
 
 @NgModule({
   declarations: [
@@ -62,6 +64,7 @@ import { BoardPostFormComponent } from './board-post-form/board-post-form.compon
     BoardDetailComponent,
     AdminComponent,
     BoardPostFormComponent,
+    ChatComponent,
   ],
   imports: [    
     BrowserModule,

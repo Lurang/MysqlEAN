@@ -12,13 +12,13 @@ import { LoginGuard } from './login.guard';
 import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
-    { path: '', redirectTo: '/home', pathMatch: 'full' },
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
+    { path: 'home', component: HomeComponent },
     { path: 'user', component: UserComponent },
     { path: 'board/:boardId', component: BoardComponent },
-    { path: 'board/:boardId/newPost', component:BoardPostFormComponent, canActivate: [LoginGuard] },
     { path: 'board/:boardId/:postId', component: BoardDetailComponent },
+    { path: 'board/:boardId/newPost', component:BoardPostFormComponent, canActivate: [LoginGuard] },
     { path: 'board/:boardId/:postId/modify', component: BoardPostFormComponent, canActivate: [LoginGuard] },
-    { path: 'home', component: HomeComponent },
     { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
 ];
 

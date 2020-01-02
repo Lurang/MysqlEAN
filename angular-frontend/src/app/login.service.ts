@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../environments/environment';
 import { Session, SessionInfo, Info, Chat } from './user/user';
+import { SocketService } from './socket.service';
 
 const header = {
   headers: {
@@ -31,8 +32,8 @@ export class LoginService {
     private http: HttpClient,
   ) { };
 
-  reqSessionInfo() {
-    this.http.get<Info>(`${this.apiBaseUrl}`, header)
+  async reqSessionInfo() {
+    await this.http.get<Info>(`${this.apiBaseUrl}`, header)
       .subscribe((data) => {
         this.session = data.session;
         this.chat = data.chats;

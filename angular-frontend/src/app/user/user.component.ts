@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { LoginService } from '../login.service';
+import { SocketService } from '../socket.service';
 
 @Component({
   selector: 'app-user',
@@ -24,10 +25,12 @@ export class UserComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private loginService: LoginService,
+    private socketService: SocketService,
     private router: Router,
   ) { };
 
   ngOnInit() {
+    this.loginService.reqSessionInfo();
     this.idForm = this._formBuilder.group({
       id: ['', Validators.required],
     });
@@ -45,12 +48,14 @@ export class UserComponent implements OnInit {
   
   get f() { 
     return this.loginForm.controls; 
-  }
+  };
+
   onLoginSubmit(loginForm) {
     this.user.id = loginForm.value.id;
     this.user.password = loginForm.value.password;
     this.loginService.login(this.user)
       .subscribe(() => {
+        this.socketService.ws.close();
         this.router.navigate(['/']);
       });
   };

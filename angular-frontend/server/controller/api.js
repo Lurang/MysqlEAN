@@ -3,6 +3,7 @@ const chat = require('../model/chat');
 
 //  /api
 exports.getIndex = async (req, res) => {
+    /*
     if (!req.session.user) {
         req.session.user = {
             id: '0',
@@ -10,6 +11,7 @@ exports.getIndex = async (req, res) => {
             admin: false,
         };
     };
+    */
     const [rows] = await board.boardList();
     const [crows] = await chat.chatList();
 

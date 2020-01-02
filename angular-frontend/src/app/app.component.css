@@ -1,0 +1,17 @@
+.container {
+    display: flex;
+    height: 90%;
+}
+
+.main {
+    flex: 7;
+}
+app-chat {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    float: right;
+    margin-left: 2rem;
+    margin-top: 1rem;
+}
