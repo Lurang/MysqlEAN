@@ -1,0 +1,48 @@
+///////////
+12.27 
+로그인세션과 게시판리스트,
+
+필요한것들 - 회원가입
+           게시글상새 + 댓글
+           
+           게시글 삭제수정
+
+           관리자페이지
+
+///////////
+12.30
+post add,update,delete
+signup,
+adminpage,
+router guard
+
+////////////
+13.31
+server 라우팅-컨트롤러 분리,
+socket, chat
+
+//////////
+1.2
+socket에서 전처럼 2번emit되는 현상발견,
+비로그인상태에서 비로그인유저가 소켓을맺고
+로그인하면 reload가 되지않아 이전비로그인 소켓이 끊기지않고 다시 로그인유저가 소켓을맺음
+고로 2개가연결되어있는셈;;
+router로 navigate하고 .then reload 하니까
+기존 비로그인꺼가 terminate 되긴했으나
+로그인한유저도 connect - terminate - connect 하고
+reload하는데 너무 오래걸림 비로그인 terminate만해줄수없을까
+--socket service를 따로 분리하여 menu버튼의 다른걸 누를떄 socket이 disconnected댐
+--그랬더니 disconnected된것들을 다시받아오는데에 문제가있음
+lastchat 을통해서 받아왔었는데 두번씩받아옴
+
+클라이언트에 lastChat저장후 connect에 lastChat을 인자로받을까 생각중 -> 그럼컴포넌트의 lastchat을 어케갱신하지?
+그리고 다른컴포넌트갔을때 메세지받으면 innerHTML null뜸, class가없으니까 끊는게맞는듯;;
+
+그냥 채팅을 홈화면에 routing하는게아니라 menu처럼 오른쪽에 항상띄워놓고
+로그인이나 비로그인일때만 page reload로 다시불러오는식으로함
+세션이끊어지면 just reload 이러니까 첨에할려던 항상열려있는 채팅창도구현되었고 여태문제였던 socket이 끊겼을때
+message event처리도 해결되었고, connect를 두번맺는것도 해결완료됨!
+
+
+crud comment, --> material panel?
+
