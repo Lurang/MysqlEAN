@@ -3,7 +3,7 @@
     <ul>
       <li><a routerLink="/">Home</a></li>
       <li *ngFor="let board of boardService.boardList">
-        <a routerLink="board/{{board.board_id}}">{{board.board_name}}</a>
+        <a routerLink="/board/{{board.board_id}}">{{board.board_name}}</a>
       </li>
         <li *ngIf="loginService.session?.admin">
           <a routerLink="/admin">adminpage</a>

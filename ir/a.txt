@@ -79,3 +79,8 @@ event instanceof NavigationEnd
 this.router.navigated = false
 https://kokohapps.tistory.com/entry/Angular4-Route-%EC%83%81%ED%83%9C-%EC%A0%80%EC%9E%A5%ED%95%B4%EB%91%90%EA%B8%B0-RouteReuseStrategy-%EA%B5%AC%ED%98%84
 
+는무슨 ㅋㅋㅋ menucomponent에서 a routerLink 를
+  board/{{board.board_id}} 에서
+ /board/{{board.board_id}} 로바꿔주니
+ ex) <a routerLink="/board/{{board.board_id}}">
+문제없이잘됨
