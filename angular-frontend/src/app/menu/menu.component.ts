@@ -20,7 +20,6 @@ export class MenuComponent implements OnInit {
   ngOnInit() {
     this.boardService.reqBoardList();
     this.loginService.reqSessionInfo();
-
   };
 
   logout(): void {

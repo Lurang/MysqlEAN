@@ -13,7 +13,7 @@
   
     <ng-container matColumnDef="title">
       <mat-header-cell *matHeaderCellDef> title </mat-header-cell>
-      <mat-cell *matCellDef="let element"><a routerLink="/board/{{element.board_id}}/{{element.post_id}}">{{element.post_title}}</a></mat-cell>
+      <mat-cell *matCellDef="let element"><a [routerLink]="['/board', element.board_id, element.post_id]">{{element.post_title}}</a></mat-cell>
     </ng-container>
   
     <ng-container matColumnDef="date">
