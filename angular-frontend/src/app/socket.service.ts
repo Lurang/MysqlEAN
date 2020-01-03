@@ -125,12 +125,7 @@ export class SocketService {
     };
 
     this.ws.onclose = () => {
-      if (this.router.url === '/home') {
-        this.router.navigate(['/'])
-          .then(() => {
-            window.location.reload();
-          });
-      };
+      window.location.reload();
     };
   };
 

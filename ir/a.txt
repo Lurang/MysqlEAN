@@ -44,5 +44,13 @@ lastchat 을통해서 받아왔었는데 두번씩받아옴
 message event처리도 해결되었고, connect를 두번맺는것도 해결완료됨!
 
 
-crud comment, --> material panel?
 
+
+//////////
+1.3
+crud comment, --> material tree?
+child를 어케편성할지
+    https://material.angular.io/components/tree/overview
+    
+api로받은 comment를 따로 가공해주어서 tree구조로 만들고 
+material tree를 이용하여 표시완료!

@@ -2,7 +2,7 @@
     <div id="chatLogs" class="chat_logs">
         <ul *ngFor="let chats of loginService.chat">
             <div *ngIf="chats.author === loginService?.session?.id" >
-                <li style="text-align: right; color: red;">
+                <li mat-list style="text-align: right; color: red;">
                     {{chats.author}}
                 </li>
                 <mat-card class="right">
