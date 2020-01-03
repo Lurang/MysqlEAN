@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../environments/environment';
 import { PostList, Index, PostDetail, BoardList } from './board';
@@ -12,7 +12,7 @@ const header = {
     'Cache': 'no-cache'
   },
   credentials: 'include',  
-}
+};
 
 @Injectable({
   providedIn: 'root'
@@ -58,7 +58,21 @@ export class BoardService {
     };
     return this.http.post<JSON>(`${this.apiBaseUrl}/board/update`, data);
   };
+  addComment(author, postId, comment, group_id, pid) {
+    let data = {
+      author: author,
+      postId: postId,
+      comment: comment,
+      group_id: group_id,
+      pid: pid,
+    };
+    return this.http.post(`${this.apiBaseUrl}/board/addComment`,data);
+  };
+  deleteComment(commentId) {
+    return this.http.post(`${this.apiBaseUrl}/board/deleteComment`,{commentId: commentId});
+  };
 
+  // admin  
   updateBoard(boardId, boardName, admin) {
     if (admin === true) {
       admin = 1;

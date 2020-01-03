@@ -59,3 +59,25 @@ exports.updatePost = async (req, res) => {
         code: 1,
     });
 };
+
+exports.deleteComment = async (req, res) => {
+    const {commentId} = req.body;
+    await board.deleteComment(commentId);
+    res.json({
+        message: "success",
+        code: 1,
+    });
+};
+
+exports.addComment = async (req, res) => {
+    const {author, postId, comment, group_id, pid} = req.body;
+    if (group_id === 0 && pid === 0) {
+        await board.addParentComment(author, postId, comment);
+    } else {
+        await board.addComment(author, postId, comment, group_id, pid);
+    };
+    res.json({
+        message: "success",
+        code: 1,
+    });
+};

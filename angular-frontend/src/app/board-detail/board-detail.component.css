@@ -14,3 +14,23 @@
     margin-top: 1rem;
     float: right;
 }
+
+.commentForm {
+    margin-left: 5px;
+    display: flex;
+}
+.mat-form-field {
+    flex: 1;
+}
+.commentInput {
+    width: 90%;; 
+}
+.commentFormButton {
+    margin-left: auto;
+    align-self: center;
+    float: right;
+    height: 50%;
+}
+.toController {
+    display: flex;
+}

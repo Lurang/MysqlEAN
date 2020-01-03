@@ -1,11 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FlatTreeControl } from '@angular/cdk/tree';
-import { MatTableDataSource, MatPaginator, MatTreeFlattener, MatTreeFlatDataSource } from '@angular/material';
+import { MatPaginator, MatTreeFlattener, MatTreeFlatDataSource } from '@angular/material';
 
 import { LoginService } from '../login.service';
 import { BoardService } from '../board/board.service';
 import { PostDetail, Comment } from '../board/board';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 interface Co {
   data: Comment,
@@ -16,28 +17,35 @@ interface FlatNode {
   data: Comment;
   level: number;
 }
+interface CommentParent{
+  author: string, 
+  pid: number, 
+  group_id: number,
+}
 
 @Component({
   selector: 'app-board-detail',
   templateUrl: './board-detail.component.html',
   styleUrls: ['./board-detail.component.css']
 })
-export class BoardDetailComponent implements OnInit {
+export class BoardDetailComponent implements OnInit, OnDestroy {
   boardId: string;
   postId: string;
   postDetail: PostDetail;
   co: Co[] = [];
-  dataSource;
-  pageSizeOptions;
+  commentParent: CommentParent;
+  commentForm: FormGroup;
   displayedColumns: string[] = ['body', 'author', 'date'];
-
+  commentTo: string = '';
+  mySubscription: any;
+  
   private _transformer = (node: Co, level: number) => {
     return {
       expandable: !!node.children && node.children.length > 0,
       data: node.data,
-      level: level
+      level: level,
     };
-  }
+  };
 
   treeControl = new FlatTreeControl<FlatNode>(node => node.level, node => node.expandable);
   treeFlateener = new MatTreeFlattener(this._transformer, node => node.level, node => node.expandable, node => node.children);
@@ -45,24 +53,40 @@ export class BoardDetailComponent implements OnInit {
   hasChild = (_: number, node: FlatNode) => node.expandable;
 
   constructor(
+    private _formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private boardService: BoardService,
     private loginService: LoginService,
-  ) { };
+  ) { 
+    this.router.routeReuseStrategy.shouldReuseRoute = () => {
+      return false;
+    };
+
+    this.mySubscription = this.router.events.subscribe((event) => {
+      this.router.navigated = false;
+    });
+  };
   
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   ngOnInit() {
+    this.commentParent = {
+      author: '', 
+      pid: 0, 
+      group_id: 0,
+    };
+
+    this.commentForm = this._formBuilder.group({
+      comment: ['', Validators.required],
+    });
+
     this.route.paramMap.subscribe(params => {
       this.boardId = params.get('boardId');
       this.postId = params.get('postId');
       this.boardService.reqPostDetail(this.boardId, this.postId)
         .subscribe((data) => {
           this.postDetail = data;
-          this.dataSource = new MatTableDataSource<Comment>(this.postDetail.comment);
-          this.dataSource.paginator = this.paginator;
-
           data.comment.forEach((element) => {
             if (element.pid === 0) {
               this.co.push({
@@ -93,6 +117,12 @@ export class BoardDetailComponent implements OnInit {
     this.loginService.reqSessionInfo();
   };
 
+  ngOnDestroy() {
+    if (this.mySubscription) {
+      this.mySubscription.unsubscribe();
+    };
+  };
+
   modifyPost() {
     this.router.navigate([`/board/${this.boardId}/${this.postId}/modify`]);
   };
@@ -105,5 +135,29 @@ export class BoardDetailComponent implements OnInit {
   backToList() {
     this.router.navigate([`/board/${this.boardId}`]);
   };
-
+  onCommentSubmit() {
+    this.boardService.addComment(this.loginService.session.id, this.postId,
+      this.commentForm.value.comment, this.commentParent.group_id, this.commentParent.pid)
+      .subscribe(() => {
+        this.router.navigate([`/board/${this.boardId}/${this.postId}`]);
+      });
+  };
+  deleteComment(id){
+    this.boardService.deleteComment(id)
+      .subscribe(() => {
+        this.router.navigate([`/board/${this.boardId}/${this.postId}`]);
+      });
+  };
+  setTo(node){
+    this.commentParent.pid = node.comment_id;
+    this.commentParent.author = node.comment_author;
+    this.commentParent.group_id = node.group_id;
+    this.commentTo = `@${node.comment_author}에게 `;
+  };
+  removeSet(){
+    this.commentTo='';
+    this.commentParent.pid = 0;
+    this.commentParent.author = '';
+    this.commentParent.group_id = 0;
+  };
 };

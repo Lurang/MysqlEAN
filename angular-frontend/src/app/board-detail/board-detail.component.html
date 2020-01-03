@@ -16,22 +16,51 @@
       <button mat-raised-button (click)="backToList()">목록으로</button>
     </div>
   </div>
+
+  <div class="commentForm">
+    <mat-form-field [formGroup]="commentForm">
+      <div class="toController">
+        <p id="commentTo" style="color: red;" [innerHTML]="commentTo"></p>
+        <button mat-flat-button type="button" 
+          (click)="removeSet()" class="removeSet" *ngIf="commentTo">x</button>
+      </div>
+      <input matInput placeholder="comment" formControlName="comment" required>
+    </mat-form-field>
+      <button mat-flat-button class="commentFormButton" 
+        (click)=onCommentSubmit()>submit</button>
+  </div>
+
   <mat-tree [dataSource]="treeDataSource" [treeControl]="treeControl">
     <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
       <button mat-icon-button disabled></button>
-      <span style="color: red;" *ngIf="node.data?.author">
-        ㄴ{{node.data?.author}}에게
-      </span>{{node.data?.comment_body}} 작성자 : {{node.data?.comment_author}} | {{node.data?.date}}
+      <div (click)="setTo(node.data)">
+        <span style="color: red; margin-right: 5px;" *ngIf="node.data?.author">
+          ㄴ{{node.data?.author}}에게
+        </span>{{node.data?.comment_body}} 작성자 : {{node.data?.comment_author}} | {{node.data?.date}}
+      </div>
+      <button mat-flat-button *ngIf="(loginService?.session && loginService?.session?.admin) || (loginService?.session &&(loginService?.session?.id === node.data?.comment_author))"
+        (click)="deleteComment(node.data?.comment_id)">
+        x
+      </button>
     </mat-tree-node>
     
     <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
       <button mat-icon-button matTreeNodeToggle
-              [attr.aria-label]="'toggle ' + node.data">
+          [attr.aria-label]="'toggle ' + node.data">
         <mat-icon class="mat-icon-rtl-mirror">
           {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
         </mat-icon>
       </button>
-      {{node.data?.comment_body}} 작성자 : {{node.data?.comment_author}} | {{node.data?.date}}
+      <div (click)="setTo(node.data)">
+        <span style="color: red; margin-right: 5px;" *ngIf="node.data?.author">
+          ㄴ{{node.data?.author}}에게
+        </span>{{node.data?.comment_body}} 작성자 : {{node.data?.comment_author}} | {{node.data?.date}}
+      </div>
+      <button mat-flat-button *ngIf="(loginService?.session && loginService?.session?.admin) || (loginService?.session &&(loginService?.session?.id === node.data?.comment_author))"
+      (click)="deleteComment(node.data?.comment_id)">
+        x
+      </button>
     </mat-tree-node>
+
   </mat-tree>
 </div>

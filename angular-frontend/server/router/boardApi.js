@@ -16,5 +16,9 @@ router.route('/addPost')
     .post(boardApiController.addPost)
 router.route('/update')
     .post(boardApiController.updatePost)
+router.route('/deleteComment')
+    .post(boardApiController.deleteComment)
+router.route('/addComment')
+    .post(boardApiController.addComment)
     
 exports.routes = router;
