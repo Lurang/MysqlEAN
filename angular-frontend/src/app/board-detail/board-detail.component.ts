@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatPaginator, MatTreeFlattener, MatTreeFlatDataSource } from '@angular/material';
 
@@ -58,13 +58,14 @@ export class BoardDetailComponent implements OnInit, OnDestroy {
     private router: Router,
     private boardService: BoardService,
     private loginService: LoginService,
-  ) { 
+  ) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => {
       return false;
     };
-
     this.mySubscription = this.router.events.subscribe((event) => {
-      this.router.navigated = false;
+      if (event instanceof NavigationEnd) {
+        this.router.navigated = false;
+      };
     });
   };
   

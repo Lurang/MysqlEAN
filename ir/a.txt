@@ -51,6 +51,31 @@ message event처리도 해결되었고, connect를 두번맺는것도 해결완�
 crud comment, --> material tree?
 child를 어케편성할지
     https://material.angular.io/components/tree/overview
-    
+
 api로받은 comment를 따로 가공해주어서 tree구조로 만들고 
 material tree를 이용하여 표시완료!
+
+add 와 delete구현하고
+전체를 reload하는일 없이 router.navigated = false라는 꼼수를이용해서
+이벤트발생시 해당페이지 다시불러옴 --> 새로고침이 가능해짐 board-detail에서
+
+그런데또다른문제점, 해당페이지를 들어갔다나오면 unsubscribe를 했는데도 home을갔다가
+이상하게 게시판쪽만 작동을안함;;
+adminpage와 home은 잘작동하고 boardComponent가 먹통
+실제설정해준건 board-detail컴포넌트라 별 연관이없는데 왜일지 고민중
+
+--아마
+this.route.paramMap.subscribe(params => {
+    this.boardId = params.get('boardId');
+    this.getPostList();
+});
+
+처럼 parameter subscribe 하는게 망가진듯?
+
+router쪽에 shouldReuseRoute가 같은경로면 false 아니면 true여서 false일때 불러오는건데
+
+여기서 문제가 생긴듯
+event instanceof NavigationEnd
+this.router.navigated = false
+https://kokohapps.tistory.com/entry/Angular4-Route-%EC%83%81%ED%83%9C-%EC%A0%80%EC%9E%A5%ED%95%B4%EB%91%90%EA%B8%B0-RouteReuseStrategy-%EA%B5%AC%ED%98%84
+
