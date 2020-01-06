@@ -87,4 +87,15 @@ https://kokohapps.tistory.com/entry/Angular4-Route-%EC%83%81%ED%83%9C-%EC%A0%80%
 이왕바꾸는거 routerLink dynamic하게 바꿔줌
 <a [routerLink]="['/board', board.board_id]">
 
-- 2019/12/27 ~ 2020/1/3 프로젝트 끝-
+/////////////////////////
+1/6
+1. 게시글, 댓글, 게시판이름 입력란이 빈공간일시 return해주는작업
+2. db관련 정리조금함, 쿼리문 조절 (userPost, 불필요한 countn제거, 
+    countPost join으로 서브쿼리 제거, 조건문 변경,
+    getComment 조건문 위치변경
+)
+3. adminpage에 게시글별로 작성된 post가 몇개인지 보는 기능이 있었는데 빠져있었음
+    api추가로 짜주어서 게시글패널누를때마다 요청 -> innerHtml에 값넣어줌
+    패널이 닫히는속도보다 db쿼리가 빨라서 조금 잔상? 같은게 남을수있지만 크게신경쓰이진않아서 넘어감
+
+- 2019/12/27 ~ 2020/1/6 프로젝트 끝-

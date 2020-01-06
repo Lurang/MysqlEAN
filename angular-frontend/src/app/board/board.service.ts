@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../environments/environment';
-import { PostList, Index, PostDetail, BoardList, postCount } from './board';
+import { PostList, Index, PostDetail, postCount, Board } from './board';
 import { LoginService } from '../login.service';
 
 const header = {
@@ -19,7 +19,7 @@ const header = {
 })
 export class BoardService {
   private apiBaseUrl = environment.apiBaseUrl;
-  boardList: BoardList[];
+  boardList: Board[];
 
   constructor(
     private http: HttpClient,
