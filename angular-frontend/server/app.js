@@ -20,6 +20,7 @@ const chatDb = require('./model/chat');
 const app = express();
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+//angular
 app.use(express.static(path.join(__dirname, '../dist')));
 
 //db
@@ -74,7 +75,7 @@ app.use('/api', apiRouter.routes);
 app.use('*', (req, res) => {
     const indexFile = path.resolve(__dirname, '../dist/index.html');
     res.sendFile(indexFile);
-})
+});
 
 //webSocket setting
 const server = http.createServer(app);

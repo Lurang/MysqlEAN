@@ -9,15 +9,15 @@ exports.postLogin = async (req, res) => {
     //idCheck
     if (!rows[0]) {
         res.json({
-            message: 0,
-        })
+            message: 'fail',
+        });
         return;
     };
     const result = await argon2.verify(rows[0].password, password);
     if (result === false) {
         res.json({
-            message: 1,
-        })
+            message: 'fail',
+        });
         return;
     };
     //adminCheck

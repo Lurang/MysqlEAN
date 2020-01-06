@@ -44,6 +44,9 @@ exports.deletePost = async (req, res) => {
 
 exports.addPost = async (req, res) => {
     const {boardId, title, body, author} = req.body;
+    if (title === '' || title == null) {
+        return res.redirect('/');
+    };
     await board.addPost(author, title, body, boardId);
     res.json({
         message: "success",
@@ -53,6 +56,9 @@ exports.addPost = async (req, res) => {
 
 exports.updatePost = async (req, res) => {
     const {postId, title, body} = req.body;
+    if (title === '' || title == null) {
+        return res.redirect('/');
+    };
     await board.updatePost(title, body, postId);
     res.json({
         message: "success",
@@ -71,6 +77,9 @@ exports.deleteComment = async (req, res) => {
 
 exports.addComment = async (req, res) => {
     const {author, postId, comment, group_id, pid} = req.body;
+    if (comment === '' || comment == null) {
+        return res.redirect('/');
+    };
     if (group_id === 0 && pid === 0) {
         await board.addParentComment(author, postId, comment);
     } else {
