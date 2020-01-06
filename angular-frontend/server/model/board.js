@@ -46,7 +46,7 @@ module.exports = class Board {
     //해당유저가 작성한 글 by paging
     static userPost(author, first, last) {
         return db.execute(`
-        select R1.*, R2.countn, ifnull(countn, 0) count from (
+        select R1.*, ifnull(R2.countn, 0) count from (
             select b.board_name, a.* from board_information b, board a where a.author = ? and a.board_id = b.board_id order by date asc
         ) R1 left join (
             select post_id pi, count(post_id) countn from comment group by post_id
@@ -76,9 +76,11 @@ module.exports = class Board {
         return db.execute(`insert into board_information (admin, board_name) values (?, ?)`, [admin, name]);
     };
     static countPost(boardId) {
-        return db.execute(`select count(*) count from (
-            select a.* from board_information b, board a where b.board_id = ? and b.board_id = a.board_id
-        ) R1`, [boardId]);
+        return db.execute(`
+        select count(0) AS count from 
+        board_information b 
+        join board a on a.board_id = b.board_id
+        where a.board_id = ?`, [boardId]);
     };
     
     /* about comment */
@@ -91,11 +93,13 @@ module.exports = class Board {
     static getComment(postId) {
         return db.execute(`
         select R1.comment_id, R1.post_id, R1.comment_author, R1.comment_body, R1.date, R1.group_id, R1.pid, ifnull(R2.author, '') author from (    
-            select comment_id, post_id, comment_author, comment_body, date, ifnull(group_id, comment_id) group_id, ifnull(pid, 0) pid from comment
+            select comment_id, post_id, comment_author, comment_body, date, ifnull(group_id, comment_id) group_id, ifnull(pid, 0) pid from comment where post_id = ?
         ) R1 left join ( 
-            select T2.comment_author author, T1.comment_id from comment T1 inner join comment T2 on T1.pid = T2.comment_id
+            select T2.comment_author author, T1.comment_id from comment T1
+            inner join
+            comment T2 on T2.comment_id = T1.pid
         ) R2 
-        on R1.comment_id = R2.comment_id where R1.post_id = ?
+        on R2.comment_id = R1.comment_id
         order by group_id asc, comment_id asc;
         `, [postId]);
     };

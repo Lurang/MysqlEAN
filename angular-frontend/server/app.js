@@ -97,7 +97,6 @@ rabbit.on('ready', () => {
 
 //wss connection
 wss.on('connection', (ws, req) => {
-    let msg = {};
     let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     ws.isAlive = true;
 
@@ -115,7 +114,9 @@ wss.on('connection', (ws, req) => {
             // login success
             case 'login':
                 const [lastId] = await chatDb.lastChatId();    
-                const [dChat] = await chatDb.lastChats(message.data.author, message.data.body, message.data.chatId);
+                const [dChat] = await chatDb.lastChats(
+                    message.data.author, message.data.body, message.data.chatId
+                );
                 msg = {
                     event: 'login',
                     id: ws.id,
