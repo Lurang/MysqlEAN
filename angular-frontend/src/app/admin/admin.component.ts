@@ -9,7 +9,7 @@ import { BoardService } from '../board/board.service';
 })
 export class AdminComponent implements OnInit {
   checkState = false;
-
+  count:number;
   constructor(
     private boardService: BoardService,
   ) { };
@@ -40,5 +40,10 @@ export class AdminComponent implements OnInit {
         window.location.reload();
       });
   };
-  
+  getCount(index) {
+    this.boardService.reqBoardCount(this.boardService.boardList[index].board_id)
+      .subscribe((data) => {
+        this.count = data.count;
+      });
+  };
 };

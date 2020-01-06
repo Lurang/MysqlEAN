@@ -6,6 +6,8 @@ const router = express.Router();
 
 //   /api/admin
 
+router.route('/:boardId')
+    .get(adminApiController.getBoard)
 router.route('/updateBoard')
     .post(adminApiController.updateBoard)
 router.route('/newBoard')

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../environments/environment';
-import { PostList, Index, PostDetail, BoardList } from './board';
+import { PostList, Index, PostDetail, BoardList, postCount } from './board';
 import { LoginService } from '../login.service';
 
 const header = {
@@ -100,5 +100,8 @@ export class BoardService {
   };
   deleteBoard(boardId) {
     return this.http.post(`${this.apiBaseUrl}/admin/deleteBoard`, {boardId: boardId});
+  };
+  reqBoardCount(boardId) {
+    return this.http.get<postCount>(`${this.apiBaseUrl}/admin/${boardId}`, header);
   };
 };

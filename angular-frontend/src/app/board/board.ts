@@ -60,6 +60,9 @@ export interface Comment {
   author: string,
 };
 
+export interface postCount {
+  count: number,
+};
 /*
 {
   "board":[

@@ -1,5 +1,12 @@
 const board = require('../model/board');
 
+exports.getBoard = async (req, res) => {
+    const {boardId} = req.params;
+    const [count] = await board.countPost(boardId);
+    res.json({
+        count: count[0].count,
+    });
+};
 exports.updateBoard = async (req, res) => {
     const {boardId, boardName, admin} = req.body;
     if (boardName === '' || boardName == null) {
