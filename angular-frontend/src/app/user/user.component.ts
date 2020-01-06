@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 
 import { LoginService } from '../login.service';
 import { SocketService } from '../socket.service';
@@ -21,13 +21,23 @@ export class UserComponent implements OnInit {
   passwordForm: FormGroup;
   nameForm: FormGroup;
   loginForm: FormGroup;
+  mySubscription: any;
 
   constructor(
     private _formBuilder: FormBuilder,
     private loginService: LoginService,
     private socketService: SocketService,
     private router: Router,
-  ) { };
+  ) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => {
+      return false;
+    };
+    this.mySubscription = this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.router.navigated = false;
+      };
+    });
+  };
 
   ngOnInit() {
     this.loginService.reqSessionInfo();
@@ -53,8 +63,17 @@ export class UserComponent implements OnInit {
   onLoginSubmit(loginForm) {
     this.user.id = loginForm.value.id;
     this.user.password = loginForm.value.password;
+    if (!this.user.id || !this.user.password) {
+      return;
+    };
     this.loginService.login(this.user)
-      .subscribe(() => {
+      .subscribe((msg) => {
+        if (msg.message === 'fail') {
+          loginForm.value.id = '';
+          loginForm.value.password = '';
+          alert('아이디와 비밀번호를 확인하세요');
+          return this.router.navigate(['/user']);
+        };
         this.socketService.ws.close();
         this.router.navigate(['/']);
       });
@@ -64,7 +83,7 @@ export class UserComponent implements OnInit {
       .subscribe((data) => {
         if (data.code === 0) {
           alert('이미 존재하는아이디입니다.');
-          window.location.reload();
+          this.router.navigate(['/user']);
         } else {
           this.router.navigate(['/']);
         };

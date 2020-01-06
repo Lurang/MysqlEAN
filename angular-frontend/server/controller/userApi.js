@@ -25,7 +25,9 @@ exports.postLogin = async (req, res) => {
     if (id === 'admin') {
         isAdmin = true;
     } else if (id === 'ADMIN') {
-        res.send('error');
+        res.json({
+            message: 'fail',
+        });
         return;
     };
     //set session

@@ -43,7 +43,7 @@ export class LoginService {
     return this.http.get<Message>(`${this.apiBaseUrl}/user/logout`);
   };
   login(user) {
-    return this.http.post<SessionInfo>(`${this.apiBaseUrl}/user/login`, user, header);
+    return this.http.post<any>(`${this.apiBaseUrl}/user/login`, user, header);
   };
   signup(id, name, password) {
     let body = {
