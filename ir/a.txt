@@ -97,5 +97,5 @@ https://kokohapps.tistory.com/entry/Angular4-Route-%EC%83%81%ED%83%9C-%EC%A0%80%
 3. adminpage에 게시글별로 작성된 post가 몇개인지 보는 기능이 있었는데 빠져있었음
     api추가로 짜주어서 게시글패널누를때마다 요청 -> innerHtml에 값넣어줌
     패널이 닫히는속도보다 db쿼리가 빨라서 조금 잔상? 같은게 남을수있지만 크게신경쓰이진않아서 넘어감
-
+4. 불필요한 interface export제거 로그인시 아이디비번틀리면 refresh, signup시 중복아이디면 refresh
 - 2019/12/27 ~ 2020/1/6 프로젝트 끝-
