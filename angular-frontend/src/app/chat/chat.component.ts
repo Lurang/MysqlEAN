@@ -15,7 +15,6 @@ export class ChatComponent implements OnInit {
   ) { };
 
   ngOnInit() {
-    this.loginService.reqSessionInfo();
     this.socketService.connect();
   };
 };

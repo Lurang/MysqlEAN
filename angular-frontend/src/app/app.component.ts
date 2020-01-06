@@ -7,10 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular-frontend';
-
-  board = ['test','ㅁㅇ','admin'];
-  
-  onSelect(board): void {
-    
-  }
 }

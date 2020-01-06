@@ -7,18 +7,7 @@ module.exports = class Board {
         return db.execute(`select count(*) count from board where board_id = ?`, [boardId]);
     };
     //해당게시판의 총post들
-    /*
-    static postList(boardId, first, last) {
-        return db.execute(`
-        select R1.*, R2.countn, ifnull(countn, 0) count
-        from (
-            select * from board where board_id = ? order by post_id asc
-        ) R1 left join (
-            select post_id pi, count(post_id) countn from comment group by post_id
-        ) R2 on R2.pi = R1.post_id limit ? offset ?`, [boardId, first, last]);
-    }
-    */
-   static postList(boardId) {
+    static postList(boardId) {
     return db.execute(`
         select R1.*, R2.countn, ifnull(countn, 0) count
         from (
@@ -77,8 +66,8 @@ module.exports = class Board {
     };
     static countPost(boardId) {
         return db.execute(`
-        select count(0) AS count from 
-        board_information b 
+        select count(0) AS count 
+        from board_information b 
         join board a on a.board_id = b.board_id
         where a.board_id = ?`, [boardId]);
     };

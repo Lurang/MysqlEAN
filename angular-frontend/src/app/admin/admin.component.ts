@@ -10,6 +10,7 @@ import { BoardService } from '../board/board.service';
 export class AdminComponent implements OnInit {
   checkState = false;
   count:number;
+  
   constructor(
     private boardService: BoardService,
   ) { };

@@ -4,7 +4,7 @@ module.exports = class Chat {
     static chatList() {
         return db.execute(`
             select author, body, date from
-            (select author, body, date from chat order by date desc limit 50)
+            (select author, body, date from chat order by date desc limit 100)
             as a order by date asc
         `);
     };
